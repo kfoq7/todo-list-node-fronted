@@ -4,7 +4,7 @@ import { axiosFetch } from '../axios'
 
 const RegisterPage = () => {
   const [userRegiser, setUserRegister] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
     confirmPass: ''
@@ -42,8 +42,8 @@ const RegisterPage = () => {
         <h2>Register User</h2>
 
         <div>
-          <label>Username: </label>
-          <input type="text" name="username" onChange={handleChange} />
+          <label>Name: </label>
+          <input type="text" name="name" onChange={handleChange} />
         </div>
         <div>
           <label>Email: </label>

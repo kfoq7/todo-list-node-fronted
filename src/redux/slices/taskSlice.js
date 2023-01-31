@@ -5,6 +5,20 @@ const initialState = {
   task: null
 }
 
+export const fetchUserTasks = createAsyncThunk(
+  'task/fetchUserTasks',
+  async user => {
+    const { _id: userId, token } = user
+    const response = await axiosFetch.get(`/user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return response.data
+  }
+)
+
 export const addTask = createAsyncThunk(
   'task/addTask',
   async ({ userId, task }) => {
@@ -20,6 +34,10 @@ const taskSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(addTask.fulfilled, (state, action) => {
       state.task = action.payload.task
+    })
+
+    builder.addCase(fetchUserTasks.fulfilled, (state, action) => {
+      state.task
     })
   }
 })

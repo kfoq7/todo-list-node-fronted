@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { axiosFetch } from '../axios'
 
 const AddTask = () => {
   const [newTask, setNewTask] = useState({
@@ -8,8 +9,8 @@ const AddTask = () => {
     description: ''
   })
 
-  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const auth = useSelector(state => state.auth)
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -20,8 +21,20 @@ const AddTask = () => {
     })
   }
 
-  const handleSubmit = () => {
-    navigate('/task')
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    try {
+      await axiosFetch.post(`/user/${auth.user._id}/create-task`, newTask, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`
+        }
+      })
+
+      navigate('/task')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

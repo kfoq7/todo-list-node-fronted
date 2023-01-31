@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, Link } from 'react-router-dom'
 import { axiosFetch } from '../axios'
+import { logout } from '../redux/slices/authSlice'
 
 const TaskPage = () => {
   const [tasks, setTasks] = useState([])
 
+  const dispatch = useDispatch()
   const auth = useSelector(state => state.auth)
 
   const fetchTaskData = async () => {
@@ -38,6 +40,10 @@ const TaskPage = () => {
           ))}
 
           <Link to="/add-task">Add a new task</Link>
+          <br />
+          <Link to="/" onClick={() => dispatch(logout())}>
+            Log out
+          </Link>
         </div>
       )}
     </>

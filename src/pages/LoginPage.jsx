@@ -33,27 +33,30 @@ const LoginPage = () => {
       {user.authorization ? (
         <Navigate to="/task" />
       ) : (
-        <div>
-          <form onSubmit={handleSubmit}>
+        <div className="wrapper">
+          <form className="form1" onSubmit={handleSubmit}>
             <h2>Login User</h2>
-            <div className="container">
-              <label>
-                <b>Email:</b>
-              </label>
-              <input type="email" name="email" onChange={handleChange} />
-            </div>
-            <div className="container">
-              <label>
-                <b>Password:</b>
-              </label>
-              <input type="password" name="password" onChange={handleChange} />
-              <br />
-              <input type="submit" value="Login" />
-            </div>
-
-            <div className="container">
-              <Link to="/register"> No tiene una cuenta? Registrate</Link>
-            </div>
+            <input
+              className="un "
+              type="email"
+              name="email"
+              placeholder="Email"
+              align="center"
+              onChange={handleChange}
+            />
+            <input
+              className="pass"
+              type="password"
+              name="password"
+              placeholder="Password"
+              align="center"
+              onChange={handleChange}
+            />
+            <br></br>
+            <input type="submit" value="Login" />
+            <p class="register" align="center">
+              <a href="/register">No tiene una cuenta? Registrate</a>
+            </p>
           </form>
         </div>
       )}

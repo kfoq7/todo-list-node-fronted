@@ -11,8 +11,10 @@ const initialState = {
 export const login = createAsyncThunk('auth/login', async (user, { rejectWithValue }) => {
   try {
     const response = await axiosFetch.post('/user/login', user)
+    // toast.success("Succesfully logged in");
     return response.data    
   } catch (error) {
+    // toast.error(error.response.data);
     return rejectWithValue(error.response.data)
   }
 })
@@ -39,8 +41,9 @@ const authSlice = createSlice({
       localStorage.setItem('authorization', true)
     })
     builder.addCase(login.rejected, (state, action) => {
-      state.errors = action.payload.message;
+      console.log(action);
       console.log(action.payload);
+      state.errors = action.payload.message;
     }
     )
   }

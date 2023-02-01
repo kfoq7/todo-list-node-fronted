@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Link } from "react-router-dom";
 import { login } from "../redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const user = useSelector((state) => state.auth);
@@ -25,7 +26,8 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(login(userLogin));
+    // dispatch(login({ userLogin, toast }));
+    dispatch(login(userLogin, toast));
   };
 
   return (
@@ -39,7 +41,7 @@ const LoginPage = () => {
             <form className="form1" onSubmit={handleSubmit}>
               <h2>Login User</h2>
               <input
-                className="un "
+                className="input-group"
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -47,7 +49,7 @@ const LoginPage = () => {
                 onChange={handleChange}
               />
               <input
-                className="pass"
+                className="input-group"
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -55,9 +57,11 @@ const LoginPage = () => {
                 onChange={handleChange}
               />
               <br></br>
-              <input type="submit" value="Login" />
-              <p class="register" align="center">
-                <a href="/register">No tiene una cuenta? Registrate</a>
+              <input className="submit" type="submit" value="Login" />
+              <p className="actionnav">
+                Don't have an account?
+                <br />
+                <a href="/register">Register here</a>
               </p>
             </form>
           </div>

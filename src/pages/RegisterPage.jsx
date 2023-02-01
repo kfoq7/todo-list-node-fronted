@@ -57,10 +57,16 @@ const RegisterPage = () => {
           <label>Confirm Password: </label>
           <input type="password" name="confirmPass" onChange={handleChange} />
         </div>
-        <input type="submit" value="Register" />
+        <br />
+        <input className="submit" type="submit" value="Register" />
         <br />
 
-        <Link to="/"> Ya tienes una cuenta? Inicia Sesión</Link>
+        {/* <Link to="/"> Do you have an account? Click here to login</Link> */}
+        <p className="actionnav">
+          Don't have an account?
+          <br />
+          <a href="/">Click here to login</a>
+        </p>
       </form>
     </div>
   );

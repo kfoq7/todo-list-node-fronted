@@ -1,28 +1,28 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { AddTask, LoginPage, RegisterPage, TaskPage } from './pages'
-import './App.css'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AddTask, LoginPage, RegisterPage, TaskPage } from "./pages";
+import "./App.scss";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <LoginPage />
+    path: "/",
+    element: <LoginPage />,
   },
   {
-    path: 'register',
-    element: <RegisterPage />
+    path: "register",
+    element: <RegisterPage />,
   },
   {
-    path: 'task',
-    element: <TaskPage />
+    path: "task",
+    element: <TaskPage />,
   },
   {
-    path: 'add-task',
-    element: <AddTask />
-  }
-])
+    path: "add-task",
+    element: <AddTask />,
+  },
+]);
 
 const App = () => {
-  return <RouterProvider router={router} />
-}
+  return <RouterProvider router={router} />;
+};
 
-export default App
+export default App;

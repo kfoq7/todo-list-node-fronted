@@ -4,7 +4,8 @@ import { axiosFetch } from '../../axios'
 const initialState = {
   user: JSON.parse(localStorage.getItem('user')),
   authorization: localStorage.getItem('authorization') || false,
-  token: localStorage.getItem('token')
+  token: localStorage.getItem('token'),
+  errors: null
 }
 
 export const login = createAsyncThunk('auth/login', async (user, { rejectWithValue }) => {
@@ -38,7 +39,7 @@ const authSlice = createSlice({
       localStorage.setItem('authorization', true)
     })
     builder.addCase(login.rejected, (state, action) => {
-      console.log('rejectedddd');
+      state.errors = action.payload.message;
       console.log(action.payload);
     }
     )

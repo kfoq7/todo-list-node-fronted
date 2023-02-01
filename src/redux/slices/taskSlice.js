@@ -38,6 +38,19 @@ export const addTask = createAsyncThunk(
   }
 )
 
+export const editTask = createAsyncThunk(
+  'task/editTask',
+  async ({ userId, taskId, task, token }) => {
+    const response = await axiosFetch.put(`/task/${userId}/${taskId}`, task, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return response.data
+  }
+)
+
 export const deleteTask = createAsyncThunk(
   'task/deleteTask',
   async ({ userId, taskId, token }) => {

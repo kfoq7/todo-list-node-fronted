@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { AddTask, LoginPage, RegisterPage, TaskPage } from './pages'
+import { AddTask, EditTask, LoginPage, RegisterPage, TaskPage } from './pages'
 import './App.css'
 
 const router = createBrowserRouter([
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: 'add-task',
     element: <AddTask />
+  },
+  {
+    path: 'edit-task',
+    element: <EditTask />
   }
 ])
 

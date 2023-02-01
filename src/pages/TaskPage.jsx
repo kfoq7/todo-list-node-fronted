@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, Link } from 'react-router-dom'
-import { axiosFetch } from '../axios'
+import { Navigate, Link, useNavigate } from 'react-router-dom'
 import { logout } from '../redux/slices/authSlice'
 import {
   deleteTask,
@@ -14,8 +13,9 @@ const TaskPage = () => {
   const [check, setCheck] = useState(false)
 
   const dispatch = useDispatch()
-  const auth = useSelector(state => state.auth)
+  const navigate = useNavigate()
   const task = useSelector(state => state.task)
+  const { user, token, authorization } = useSelector(state => state.auth)
 
   // console.log(task)
   // const fetchTaskData = async () => {
@@ -34,12 +34,7 @@ const TaskPage = () => {
     const status = check ? 'COMPLETED' : 'PENDING'
 
     dispatch(
-      updateStatusTask({
-        userId: auth.user._id,
-        taskId,
-        status,
-        token: auth.token
-      })
+      updateStatusTask({ userId: user._id, taskId, status, token: token })
     )
   }
 
@@ -49,17 +44,21 @@ const TaskPage = () => {
     //     Authorization: `Bearer ${auth.token}`
     //   }
     // })
-    dispatch(deleteTask({ userId: auth.user._id, taskId, token: auth.token }))
+    dispatch(deleteTask({ userId: user._id, taskId, token: token }))
+  }
+
+  const handleEditTask = taskId => {
+    navigate('/edit-task')
   }
 
   useEffect(() => {
-    dispatch(fetchUserTasks({ userId: auth.user._id, token: auth.token }))
+    dispatch(fetchUserTasks({ userId: user._id, token: token }))
     // fetchTaskData()
   }, [])
 
   return (
     <>
-      {!auth.authorization ? (
+      {!authorization ? (
         <Navigate to="/" />
       ) : (
         <>
@@ -81,6 +80,7 @@ const TaskPage = () => {
                 <button onClick={() => handleDeleteTask(task._id)}>
                   Delete
                 </button>
+                <button onClick={() => handleEditTask(task._id)}>Edit</button>
                 <hr />
               </div>
             ))}

@@ -4,14 +4,13 @@ import { Navigate, Link } from 'react-router-dom'
 import { login } from '../redux/slices/authSlice'
 
 const LoginPage = () => {
-  const user = useSelector(state => state.auth)
-
   const [userLogin, setUserLogin] = useState({
     email: '',
     password: ''
   })
 
   const dispatch = useDispatch()
+  const user = useSelector(state => state.auth)
 
   const handleChange = e => {
     const { name, value } = e.target

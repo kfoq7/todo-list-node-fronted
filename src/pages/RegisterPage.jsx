@@ -37,8 +37,8 @@ const RegisterPage = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="wrapper">
+      <form className="form1" onSubmit={handleSubmit}>
         <h2>Register User</h2>
 
         <div>
@@ -58,6 +58,7 @@ const RegisterPage = () => {
           <input type="password" name="confirmPass" onChange={handleChange} />
         </div>
         <input type="submit" value="Register" />
+        <br />
 
         <Link to="/"> Ya tienes una cuenta? Inicia Sesión</Link>
       </form>

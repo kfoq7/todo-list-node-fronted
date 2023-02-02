@@ -64,30 +64,33 @@ const TaskPage = () => {
         <>
           {task.errors ?? <div>{task.errors}</div>}
           <div>
+            <h2>Task List</h2>
             {task.tasks.map(task => (
-              <div key={task._id}>
-                <h2>{task.title}</h2>
-
-                <p>{task.description}</p>
-
-                {/* <input
-                  type="checkbox"
-                  onChange={() => handleChangeTask(task._id)}
-                /> */}
-                <button onClick={() => handleChangeTaskStatus(task._id)}>
+              <div className="item-container" key={task._id}>
+                <div className="item">{task.title}</div>
+                <div className="item">{task.description}</div>
+                <button
+                  className="button"
+                  onClick={() => handleChangeTaskStatus(task._id)}
+                >
                   Done
                 </button>
-                <button onClick={() => handleDeleteTask(task._id)}>
+                <button
+                  className="button"
+                  onClick={() => handleDeleteTask(task._id)}
+                >
                   Delete
                 </button>
                 <button onClick={() => handleEditTask(task._id)}>Edit</button>
                 <hr />
               </div>
             ))}
-
-            <Link to="/add-task">Add a new task</Link>
             <br />
-            <Link to="/" onClick={() => dispatch(logout())}>
+            <Link className="item" to="/add-task">
+              Add Task
+            </Link>
+
+            <Link className="item" to="/" onClick={() => dispatch(logout())}>
               Log out
             </Link>
           </div>

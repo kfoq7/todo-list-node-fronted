@@ -7,9 +7,13 @@ const initialState = {
   token: localStorage.getItem('token')
 }
 
-export const login = createAsyncThunk('auth/login', async user => {
-  const response = await axiosFetch.post('/user/login', user)
-  return response.data
+export const login = createAsyncThunk('auth/login', async (user, { rejectWithValue }) => {
+  try {
+    const response = await axiosFetch.post('/user/login', user)
+    return response.data    
+  } catch (error) {
+    return rejectWithValue(error.response.data)
+  }
 })
 
 const authSlice = createSlice({
@@ -33,6 +37,11 @@ const authSlice = createSlice({
       localStorage.setItem('user', JSON.stringify(user))
       localStorage.setItem('authorization', true)
     })
+    builder.addCase(login.rejected, (state, action) => {
+      console.log('rejectedddd');
+      console.log(action.payload);
+    }
+    )
   }
 })
 

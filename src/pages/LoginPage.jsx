@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { login } from '../redux/slices/authSlice'
 
 const LoginPage = () => {
@@ -23,6 +24,10 @@ const LoginPage = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+
+    if (Object.values(userLogin).some(value => value === '')) {
+      return toast.warn('Campos vacios')
+    }
 
     // dispatch(login({ userLogin, toast }));
     dispatch(login(userLogin))

@@ -22,11 +22,9 @@ const RegisterPage = () => {
     e.preventDefault()
 
     if (Object.values(userRegiser).some(value => value === '')) {
-      console.log('Campos vacios')
-      return
+      return toast.warn('Campos vacios')
     }
 
-    console.log(userRegiser)
     try {
       const { data } = await axiosFetch.post('/user/register', userRegiser)
       console.log(data.message)

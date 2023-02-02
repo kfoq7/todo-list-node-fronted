@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 import { axiosFetch } from '../../axios'
 
 const initialState = {
@@ -92,9 +93,11 @@ const taskSlice = createSlice({
     builder.addCase(addTask.fulfilled, (state, action) => {
       state.tasks = action.payload.tasks
       state.errors = null
+      toast.success('Task added')
     })
     builder.addCase(addTask.rejected, (state, action) => {
       state.errors = action.error.message
+      // toast.error()
     })
 
     builder.addCase(fetchUserTasks.pending, state => {
@@ -116,6 +119,7 @@ const taskSlice = createSlice({
     builder.addCase(deleteTask.fulfilled, (state, action) => {
       const { user } = action.payload
       state.tasks = user.tasks
+      toast.warn('Task deleted')
     })
 
     builder.addCase(updateStatusTask.fulfilled, (state, action) => {

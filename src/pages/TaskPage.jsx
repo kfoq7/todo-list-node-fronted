@@ -47,10 +47,6 @@ const TaskPage = () => {
     dispatch(deleteTask({ userId: user._id, taskId, token: token }))
   }
 
-  const handleEditTask = taskId => {
-    navigate('/edit-task')
-  }
-
   useEffect(() => {
     dispatch(fetchUserTasks({ userId: user._id, token: token }))
     // fetchTaskData()
@@ -62,7 +58,6 @@ const TaskPage = () => {
         <Navigate to="/" />
       ) : (
         <>
-          {task.errors ?? <div>{task.errors}</div>}
           <div>
             <h2>Task List</h2>
             {task.tasks.map(task => (
@@ -81,7 +76,6 @@ const TaskPage = () => {
                 >
                   Delete
                 </button>
-                <button onClick={() => handleEditTask(task._id)}>Edit</button>
                 <hr />
               </div>
             ))}

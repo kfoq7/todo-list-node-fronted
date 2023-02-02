@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { axiosFetch } from '../axios'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { addTask } from '../redux/slices/taskSlice'
 
 const AddTask = () => {
@@ -50,8 +49,8 @@ const AddTask = () => {
       {!auth.authorization ? (
         <Navigate to="/" />
       ) : (
-        <div>
-          <form onSubmit={handleSubmit}>
+        <div className="wrapper">
+          <form className="form1" onSubmit={handleSubmit}>
             <h2>Add Task</h2>
 
             <div>
@@ -63,10 +62,13 @@ const AddTask = () => {
               <input type="text" name="description" onChange={handleChange} />
             </div>
 
-            <input type="submit" value="AddTask" />
+            {/* <input type="submit" value="AddTask" /> */}
+            <br></br>
+            <input className="submit" type="submit" value="AddTask" />
+            <p className="actionnav">
+              <a href="/task">Back</a>
+            </p>
           </form>
-
-          <Link to="/task">Back</Link>
         </div>
       )}
     </>
